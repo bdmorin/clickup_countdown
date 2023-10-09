@@ -1,24 +1,27 @@
 var app = new Vue({
     el: '#app',
     data: {
-        count: this.getURLParam('count', 60),
-    },
-    created: function() {
-        this.countdown();
+        count: this.calculateCountdown(this.getURLParam('date', this.formatDate(new Date()))),
+        label: this.getURLParam('label', 'Countdown'),
     },
     methods: {
         getURLParam: function(paramName, defaultValue) {
             var urlParams = new URLSearchParams(window.location.search);
             return urlParams.get(paramName) || defaultValue;
         },
-        countdown: function() {
-            if(this.count > 0) {
-                setTimeout(() => {
-                    this.count--;
-                    this.countdown();
-                }, 1000);
-            }
+        formatDate: function(date) {
+            return date.toISOString().slice(0,10).split('-').join('');
         },
+        calculateCountdown: function(targetDate) {
+            let now = new Date();
+            targetDate = new Date([targetDate.slice(0, 4), targetDate.slice(4, 6), targetDate.slice(6, 8)].join('-'));
+            let diff = Math.max((targetDate - now) / (1000 * 60 * 60 * 24), 0);
+            return Math.ceil(diff);
+        }
+    },
+    mounted: function() {
+        setInterval(() => {
+            this.count = this.calculateCountdown(this.getURLParam('date', this.formatDate(new Date())))
+        }, 1000 * 60 * 60); // Update every hour
     }
 });
-
