@@ -1,0 +1,16 @@
+{
+  "name": "clickup_countdown",
+  "version": "1.0.0",
+  "description": "Countdown widget for clickup",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "tailwindcss": "^3.3.3",
+    "vue": "^3.3.4"
+  }
+}
