@@ -1,8 +1,8 @@
 var app = new Vue({
     el: '#app',
     data: {
-        count: this.calculateCountdown(this.getURLParam('date', this.formatDate(new Date()))),
-        label: this.getURLParam('label', 'Countdown'),
+        count: 0,
+        label: '',
     },
     methods: {
         getURLParam: function(paramName, defaultValue) {
@@ -19,7 +19,9 @@ var app = new Vue({
             return Math.ceil(diff);
         }
     },
-    mounted: function() {
+    created: function() {
+        this.label = this.getURLParam('label', 'Countdown');
+        this.count = this.calculateCountdown(this.getURLParam('date', this.formatDate(new Date())));
         setInterval(() => {
             this.count = this.calculateCountdown(this.getURLParam('date', this.formatDate(new Date())))
         }, 1000 * 60 * 60); // Update every hour
