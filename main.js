@@ -19,7 +19,7 @@ var app = new Vue({
             return Math.ceil(diff);
         }
     },
-    created: function() {
+    mounted: function() {
         this.label = this.getURLParam('label', 'Countdown');
         this.count = this.calculateCountdown(this.getURLParam('date', this.formatDate(new Date())));
         setInterval(() => {
